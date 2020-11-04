@@ -139,8 +139,8 @@ export function activate(context: vscode.ExtensionContext) {
 	let fsProvider = vscode.workspace.registerFileSystemProvider('hhc', vfsProvider, { isCaseSensitive: false, isReadonly: false });
 
 	const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-	statusBar.text = '今日日历';
-	statusBar.tooltip = 'Happy Hacking Calendar';
+	statusBar.text = '$(calendar)';
+	statusBar.tooltip = 'Happy Hacking Calendar: 今日';
 	statusBar.command = 'hhc.today';
 	statusBar.show();
 
