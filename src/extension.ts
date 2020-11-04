@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as vscode from 'vscode';
 import {VfsProvider} from './utils/vfsprovider';
 
@@ -49,6 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
 	const vfsProvider = new VfsProvider();
 	let currentEditor: vscode.TextEditor | undefined;
 	let pauseWatchEditor = false;
+	let visibleEditors = vscode.window.visibleTextEditors;
 
 	let todayCommand = vscode.commands.registerCommand('hhc.today', async () => {
 		currentEditor = undefined;
@@ -77,6 +77,26 @@ export function activate(context: vscode.ExtensionContext) {
 		}, 0);
 	});
 
+	let gotoCommand = vscode.commands.registerCommand('hhc.goto', async () => {
+		const year = new Date().getFullYear();
+		const monthPick = await vscode.window.showQuickPick([...Array(12).keys()].map(i => (i + 1) + ' 月'));
+		if (monthPick) {
+			const monthMatch = monthPick.match(/\d+/);
+			const month = monthMatch ? Number(monthMatch[0]) : 1;
+			let days = 30;
+			if ([1, 3, 5, 7, 8, 10, 12].includes(month)) {
+				days = 31;
+			} else if (month === 2) {
+				days = (year % 4 === 0 && (year % 400 === 0 || year % 100 !== 0)) ? 29 : 28;
+			}
+			const dayPick = await vscode.window.showQuickPick([...Array(days).keys()].map(i => (i + 1).toString()));
+			if (dayPick) {
+				const day = Number(dayPick);
+				await openPage(year, month, day);
+			}
+		}
+	});
+
 	let fsProvider = vscode.workspace.registerFileSystemProvider('hhc', vfsProvider, { isCaseSensitive: false, isReadonly: false });
 
 	const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
@@ -85,10 +105,10 @@ export function activate(context: vscode.ExtensionContext) {
 	statusBar.command = 'hhc.today';
 	statusBar.show();
 
-	context.subscriptions.push(todayCommand, tomorrowCommand, weekCommand, fsProvider, statusBar);
+	context.subscriptions.push(todayCommand, tomorrowCommand, weekCommand, gotoCommand, fsProvider, statusBar);
 
 	vscode.window.onDidChangeActiveTextEditor((editor) => {
-		if (!pauseWatchEditor && editor && editor.document.uri.scheme === 'hhc') {
+		if (!pauseWatchEditor && editor && editor.document.uri.scheme === 'hhc' && !visibleEditors.includes(editor)) {
 			currentEditor = editor;
 		}
 	});
@@ -117,6 +137,7 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 			
 			setTimeout(() => {
+				visibleEditors = vscode.window.visibleTextEditors;
 				pauseWatchEditor = false;
 			}, 0);
 		}

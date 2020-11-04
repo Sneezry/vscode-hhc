@@ -27,6 +27,10 @@
 			{
 				"command": "hhc.week",
 				"title": "Happy Hacking Calendar: 本周"
+			},
+			{
+				"command": "hhc.goto",
+				"title": "Happy Hacking Calendar: 跳到"
 			}
 		]
 	},

@@ -38,7 +38,7 @@ export class Calendar {
 
   private static getLine3(y: number, m: number, d: number) {
     let dateLua = Calendar.getLua(y, m, d);
-    return `${dateLua}　　　　　　          `;
+    return `${dateLua}${dateLua.length === 4 ? "　" : ""}　　　　　          `;
   }
 
   private static getLine4() {
