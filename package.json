@@ -7,7 +7,7 @@
 		"url": "https://github.com/Sneezry/vscode-hhc.git"
 	},
 	"publisher": "sneezry",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
@@ -29,8 +29,16 @@
 				"title": "Happy Hacking Calendar: 明日"
 			},
 			{
+				"command": "hhc.yesterday",
+				"title": "Happy Hacking Calendar: 昨日"
+			},
+			{
 				"command": "hhc.week",
 				"title": "Happy Hacking Calendar: 本周"
+			},
+			{
+				"command": "hhc.lastweek",
+				"title": "Happy Hacking Calendar: 上周"
 			},
 			{
 				"command": "hhc.goto",

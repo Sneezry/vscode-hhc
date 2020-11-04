@@ -28,6 +28,15 @@ async function openTomorrowPage() {
 	await openPage(y, m, d);
 }
 
+async function openYesterdayPage() {
+	const yesterday = new Date();
+	yesterday.setDate(yesterday.getDate() - 1);
+	const y = yesterday.getFullYear();
+	const m = yesterday.getMonth() + 1;
+	const d = yesterday.getDate();
+	await openPage(y, m, d);
+}
+
 async function openWeekPage() {
 	const today = new Date();
 	const firstTime = today.getTime() - today.getDay() * 24 * 3600 * 1000;
@@ -41,6 +50,18 @@ async function openWeekPage() {
 		} else {
 			await openPage(y, m, d);
 		}
+	}
+}
+
+async function openLastWeekPage() {
+	const today = new Date();
+	const firstTime = today.getTime() - (today.getDay() + 7) * 24 * 3600 * 1000;
+	for (let day = 0; day < 7; day++) {
+		const currentDate = new Date(firstTime + day * 24 * 3600 * 1000);
+		const y = currentDate.getFullYear();
+		const m = currentDate.getMonth() + 1;
+		const d = currentDate.getDate();
+		await openPage(y, m, d);
 	}
 }
 
@@ -68,10 +89,28 @@ export function activate(context: vscode.ExtensionContext) {
 		}, 0);
 	});
 
+	let yesterdayCommand = vscode.commands.registerCommand('hhc.yesterday', async () => {
+		currentEditor = undefined;
+		pauseWatchEditor = true;
+		await openYesterdayPage();
+		setTimeout(() => {
+			pauseWatchEditor = false;
+		}, 0);
+	});
+
 	let weekCommand = vscode.commands.registerCommand('hhc.week', async () => {
 		currentEditor = undefined;
 		pauseWatchEditor = true;
 		await openWeekPage();
+		setTimeout(() => {
+			pauseWatchEditor = false;
+		}, 0);
+	});
+
+	let lastWeekCommand = vscode.commands.registerCommand('hhc.lastweek', async () => {
+		currentEditor = undefined;
+		pauseWatchEditor = true;
+		await openLastWeekPage();
 		setTimeout(() => {
 			pauseWatchEditor = false;
 		}, 0);
@@ -105,7 +144,7 @@ export function activate(context: vscode.ExtensionContext) {
 	statusBar.command = 'hhc.today';
 	statusBar.show();
 
-	context.subscriptions.push(todayCommand, tomorrowCommand, weekCommand, gotoCommand, fsProvider, statusBar);
+	context.subscriptions.push(todayCommand, tomorrowCommand, yesterdayCommand, weekCommand, lastWeekCommand, gotoCommand, fsProvider, statusBar);
 
 	vscode.window.onDidChangeActiveTextEditor((editor) => {
 		if (!pauseWatchEditor && editor && editor.document.uri.scheme === 'hhc' && !visibleEditors.includes(editor)) {
