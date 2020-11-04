@@ -2,8 +2,12 @@
 	"name": "hhc",
 	"displayName": "Happy Hacking Calendar",
 	"description": "",
+	"icon": "calendar.png",
+	"repository": {
+		"url": "https://github.com/Sneezry/vscode-hhc.git"
+	},
 	"publisher": "sneezry",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
