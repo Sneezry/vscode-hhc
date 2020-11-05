@@ -1,13 +1,13 @@
 {
 	"name": "hhc",
-	"displayName": "Happy Hacking Calendar",
-	"description": "",
+	"displayName": "编程日历",
+	"description": "《了不起的程序员2021》编程日历配套的 VS Code 日历扩展",
 	"icon": "calendar.png",
 	"repository": {
 		"url": "https://github.com/Sneezry/vscode-hhc.git"
 	},
 	"publisher": "sneezry",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
@@ -22,23 +22,23 @@
 		"commands": [
 			{
 				"command": "hhc.today",
-				"title": "Happy Hacking Calendar: 今日"
+				"title": "编程日历：今日"
 			},
 			{
 				"command": "hhc.tomorrow",
-				"title": "Happy Hacking Calendar: 明日"
+				"title": "编程日历：明日"
 			},
 			{
 				"command": "hhc.yesterday",
-				"title": "Happy Hacking Calendar: 昨日"
+				"title": "编程日历：昨日"
 			},
 			{
 				"command": "hhc.week",
-				"title": "Happy Hacking Calendar: 本周"
+				"title": "编程日历：本周"
 			},
 			{
 				"command": "hhc.lastweek",
-				"title": "Happy Hacking Calendar: 上周"
+				"title": "编程日历：上周"
 			}
 		]
 	},

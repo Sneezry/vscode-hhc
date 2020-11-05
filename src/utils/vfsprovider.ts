@@ -57,7 +57,7 @@ export class VfsProvider implements vscode.FileSystemProvider {
   readFile(uri: vscode.Uri): Uint8Array | Thenable<Uint8Array> {
     let content = '';
 
-    if (/today/.test(uri.path)) {
+    if (/今日/.test(uri.path)) {
       const y = new Date().getFullYear();
       const m = new Date().getMonth() + 1;
       const d = new Date().getDate();

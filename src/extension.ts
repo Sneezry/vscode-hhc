@@ -9,8 +9,8 @@ async function openPage(y?: number, m?: number, d?: number) {
 		uri = vscode.Uri.parse(`hhc://page/${y}-${m}-${d}`);
 		todoUri = vscode.Uri.parse(`hhc://todo/${y}-${m}-${d}/ToDoList.md`);
 	} else {
-		uri = vscode.Uri.parse('hhc://page/today');
-		todoUri = vscode.Uri.parse('hhc://todo/today/ToDoList.md');
+		uri = vscode.Uri.parse('hhc://page/今日');
+		todoUri = vscode.Uri.parse('hhc://todo/今日/ToDoList.md');
 	}
 
 	await vscode.workspace.openTextDocument (uri)
