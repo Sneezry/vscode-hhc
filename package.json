@@ -1,13 +1,13 @@
 {
 	"name": "hhc",
 	"displayName": "编程日历",
-	"description": "《了不起的程序员2021》编程日历配套的 VS Code 日历扩展",
+	"description": "《了不起的程序员2021》编程日历配套 VS Code 日历扩展",
 	"icon": "calendar.png",
 	"repository": {
 		"url": "https://github.com/Sneezry/vscode-hhc.git"
 	},
 	"publisher": "sneezry",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"engines": {
 		"vscode": "^1.50.0"
 	},
