@@ -140,7 +140,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
 	statusBar.text = '$(calendar)';
-	statusBar.tooltip = 'Happy Hacking Calendar: 今日';
+	statusBar.tooltip = '编程日历：今日';
 	statusBar.command = 'hhc.today';
 	statusBar.show();
 
